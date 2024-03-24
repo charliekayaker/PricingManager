@@ -1,16 +1,22 @@
 package com.inditex.pricingapi.domain.services;
 
+import org.junit.jupiter.api.Test;
+
 class PricingServicesImplTest {
     private static PriceRepository mockedPriceRepository;
     private static PriceServiceImpl service;
     private Price priceItem1;
     private Price priceItem2;
 
-    testGetByProductAndBrand_whenIsSuccess_shouldReturnPriceItem();
+    @Test
+    testGetByProductAndBrand_whenIsSuccess_shouldReturnPriceItem() throws Exception{}
 
-    casesOfSuccessByAppliedDate();
+    @Test
+    casesOfSuccessByAppliedDate() throws Exception{}
 
-    testGetByProductAndBrand_whenPriceNotExists_shouldReturnNotFoundApiException();
+    @Test
+    testGetByProductAndBrand_whenPriceNotExists_shouldReturnNotFoundApiException() throws Exception{}
 
-    testGetByProductAndBrand_whenProviderFails_shouldReturnApiException();
+    @Test
+    testGetByProductAndBrand_whenProviderFails_shouldReturnApiException() throws Exception{}
 }
