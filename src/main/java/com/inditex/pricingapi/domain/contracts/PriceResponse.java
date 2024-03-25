@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.inditex.pricingapi.domain.models.constants.DateTime;
 import com.inditex.pricingapi.domain.models.entities.Price;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

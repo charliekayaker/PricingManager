@@ -1,7 +1,6 @@
 package com.inditex.pricingapi.domain.contracts;
 
 import com.inditex.pricingapi.domain.models.constants.DateTime;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
