@@ -1,0 +1,106 @@
+openapi: 3.0.1
+info:
+  description: Pricing-api is an API for managing products prices.
+  version: 1.0.0
+  title: Pricing-api
+  contact:
+    name: Carlos Alfonso
+    email: "carlosafonso.it@gmail.com"
+paths:
+  /prices/search:
+    get:
+      tags:
+        - search
+      summary: price searching
+      description: search for price by brand, product and date.
+      parameters:
+        - in: query
+          name: product_id
+          schema:
+            type: integer
+          required: true
+          description: product ID
+        - in: query
+          name: brand_id
+          schema:
+            type: integer
+          required: true
+          description: brand ID
+        - in: query
+          name: apply_at
+          schema:
+            type: string
+            format: date-time
+          required: true
+          description: searching date
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 400
+                  message: invalid parameter {product_id}.
+                  error: bad_request
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 404
+                  message: price not found
+                  error: not_found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  code: 500
+                  message: internal server error
+                  error: internal_server_error
+components:
+  schemas:
+    PriceResponse:
+      type: object
+      properties:
+        product_id:
+          type: integer
+          format: int64
+          description: product ID
+          example: 35455
+        brand_id:
+          type: integer
+          format: int64
+          description: brand ID
+          example: 1
+        start_date:
+          type: string
+          format: date-time
+          description: start date of range of prices.
+        end_date:
+          type: string
+          format: date-time
+          description: end date of range of prices.
+          example: "2020-12-01T12:30:00"
+        price_list:
+          type: integer
+          format: int64
+          description: identifier of price list
+          example: 1
+        price:
+          type: number
+          format: float
+          description: final price of product
+          example: 35.45

@@ -1,0 +1,41 @@
+@startuml
+
+title Search prices
+
+actor user
+user -> PriceController: query price by product_id, \n brand_id and date
+
+PriceController -> PriceController: validate params
+
+alt invalid parameters
+PriceController -> user: 400 Bad request
+end
+
+PriceController -> PriceService: getByBrandAndProductAndDate,
+
+PriceService -> PriceRepository: findTopByBrandAndProductAndDate
+
+Database PricingDB
+PriceRepository -> PricingDB: select by max priority
+
+alt database error
+PricingDB -> PriceRepository: throws Exception
+PriceRepository -> PriceService: throws Exception
+PriceService -> PriceController: throws ApiException
+PriceController -> user: 500 Internal server error
+end
+
+PriceRepository -> PriceService: return price result
+
+PriceService -> PriceService: check if record exists
+
+alt empty result
+PriceService -> PriceController: throws BadRequestApiException
+PriceController -> user: 404 Not found
+end
+
+PriceService -> PriceController: return price entity
+
+PriceController -> user: 200 Ok
+
+@enduml
